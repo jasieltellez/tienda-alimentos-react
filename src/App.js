@@ -26,7 +26,7 @@ class App extends Component {
               </div>
               <div className="row">
                 <div className="input-field col l4">
-                  <a className="btn " href="#" >Ingresar</a>
+                  <a className="btn " href="./home" >Ingresar</a>
                 </div>
               </div>
         </div>
