@@ -98,6 +98,7 @@ if(prod.nombre.includes(criterio)){
 
 
 verDetallesProducto(e){
+
 var nombre=e.target.name
 request
 .get(' https://tienda-alimentos.firebaseio.com/.json')
@@ -105,6 +106,7 @@ request
 for (let prod of res.body.Productos){
 if(prod.nombre===nombre){
 sessionStorage.setItem("prodDetails",JSON.stringify(prod))
+
 window.location.replace('./home/details')
 break
 }
@@ -126,11 +128,11 @@ else{
 for (let prod of this.state.Productos) {
 if(prod.nombre==nombre){
 let subtotal=prod.precio*cantidad;
-console.log(subtotal)
+
 let p=JSON.parse(`{"nombre":"${prod.nombre}","subtotal":"${subtotal}","cantidad":"${cantidad}"}`)
 this.kart.push(p)
   sessionStorage.setItem('kart', JSON.stringify(this.kart))
-  console.log(sessionStorage.getItem('kart'))
+
 return
 }
 }

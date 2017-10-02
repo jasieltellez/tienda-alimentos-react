@@ -35,7 +35,7 @@ this.state={}
 
 componentWillMount(){
 
-this.setState(JSON.parse((localStorage.getItem("prodDetails"))))
+this.setState(JSON.parse((sessionStorage.getItem("prodDetails"))))
 
 
 }

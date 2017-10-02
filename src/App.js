@@ -7,7 +7,7 @@ import './App.css';
 class App extends React.Component {
   constructor(){
     super()
-    
+
   }
 
   render() {
@@ -54,20 +54,19 @@ verificarLogin(){
     for (let user of res.body.Usuarios) {
       if (user.username===document.getElementById('email').value && user.pass===document.getElementById('password').value) {
 
-        //aqui debo redireccionar
+          window.location.replace('./home')
 
         return
       }
 
     }
-
-
-
-
+    alert('Usuario o contraseña incorrecto')
     })
-
 }
-
+componentWillMount(){
+  sessionStorage.setItem('kart',null)
+  sessionStorage.setItem('prodDetails',null)
+}
 }
 
 export default App;

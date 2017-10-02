@@ -1,5 +1,5 @@
 import React from 'react';
-
+import * as request from 'superagent';
 import './Kart.css';
 
 
@@ -10,7 +10,10 @@ import './Kart.css';
  this.carrito=JSON.parse(sessionStorage.getItem('kart'))
  if(this.carrito==null){
  this.carrito=[]
+ this.total=0
  }
+ this.cancelarCompra= this.cancelarCompra.bind(this)
+ this.pagarCompra= this.pagarCompra.bind(this)
  }
   render() {
     return (
@@ -51,10 +54,10 @@ import './Kart.css';
 
           </div>
           <div className="col l6">
-            <h5>Total: CLP2000</h5>
+            <h5>Total: CLP{this.total}</h5>
             <div className="row">
-                <a href="./home" className="btn">Cancelar</a>
-                <a  className="btn">Pagar</a>
+                <a onClick={this.cancelarCompra} className="btn">Cancelar</a>
+                <a onClick={this.pagarCompra} className="btn">Pagar</a>
 
             </div>
           </div>
@@ -64,6 +67,51 @@ import './Kart.css';
     </div>
 
     );
+  }
+  componentWillMount(){
+  this.total=0;
+  for (let item of this.carrito){
+  this.total+=parseInt(item.subtotal)
+  }
+  }
+
+  componentDidMount(){
+  request
+  .get(' https://tienda-alimentos.firebaseio.com/.json')
+  .end((err,res)=>{
+  this.setState(res.body)
+
+  }
+
+  )
+  }
+
+  cancelarCompra(){
+  sessionStorage.setItem('kart',null)
+  window.location.replace('../home')
+  }
+  pagarCompra(){
+
+  for (let car of this.carrito) {
+    for (let producto of this.state.Productos) {
+      if(car.nombre==producto.nombre){
+       producto.disponible-=parseInt(car.cantidad)
+         break;
+
+      }
+    }
+
+  }
+  request
+  .put(' https://tienda-alimentos.firebaseio.com/.json',this.state)
+  .end((err,res)=>{
+  
+  sessionStorage.setItem('kart',null)
+  window.location.replace('../home')
+  }
+
+  )
+
   }
 }
 
