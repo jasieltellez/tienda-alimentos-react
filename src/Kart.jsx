@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import './Kart.css';
 
 
- class Kart extends Component {
+ class Kart extends React.Component {
   render() {
     return (
     <div className=" details-container ">
@@ -13,6 +13,7 @@ import './Kart.css';
         <div className="col l12">
           <div className="col l6">
             <table>
+              <tbody>
               <tr >
                 <td>
                   <div className="row">
@@ -30,6 +31,7 @@ import './Kart.css';
 
 
               </tr>
+              </tbody>
             </table>
 
 

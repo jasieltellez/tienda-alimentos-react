@@ -1,8 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
+import * as request from 'superagent'
+
 
 import './App.css';
 
-class App extends Component {
+class App extends React.Component {
+  constructor(){
+    super()
+    
+  }
+
   render() {
     return (
       <div className="App">
@@ -15,18 +22,18 @@ class App extends Component {
               <div className="row">
                 <div className="input-field col l8">
                   <input id="email" type="email" className="validate" required/>
-                  <label for="email"data-error="Inserte Email válido" data-success="Correcto">Email</label>
+                  <label htmlFor="email"data-error="Inserte Email válido" data-success="Correcto">Email</label>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field col l8">
                   <input id="password" type="password" className="validate" required />
-                  <label for="password" data-error="Rellenar" data-success="Correcto">Conraseña</label>
+                  <label htmlFor="password" data-error="Rellenar" data-success="Correcto">Conraseña</label>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field col l4">
-                  <a className="btn " href="./home" >Ingresar</a>
+                  <a className="btn " onClick={this.verificarLogin} >Ingresar</a>
                 </div>
               </div>
         </div>
@@ -38,6 +45,29 @@ class App extends Component {
       </div>
     );
   }
+
+verificarLogin(){
+
+  request
+  .get(' https://tienda-alimentos.firebaseio.com/.json')
+  .end((err,res)=>{
+    for (let user of res.body.Usuarios) {
+      if (user.username===document.getElementById('email').value && user.pass===document.getElementById('password').value) {
+
+        //aqui debo redireccionar
+
+        return
+      }
+
+    }
+
+
+
+
+    })
+
+}
+
 }
 
 export default App;

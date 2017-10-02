@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
+import * as request from 'superagent'
+import './Home.css'
 
-import './Home.css';
 
+class Home extends React.Component {
+constructor(){
+super()
 
-class Home extends Component {
+}
   render() {
     return (
 
@@ -29,6 +33,9 @@ class Home extends Component {
 
     );
   }
+
+
+
 }
 
 export default Home;
