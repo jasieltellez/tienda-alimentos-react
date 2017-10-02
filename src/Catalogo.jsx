@@ -1,7 +1,7 @@
 import React from 'react';
 import * as request from 'superagent';
 import './Catalogo.css';
-
+import Home from './Home.jsx';
 
 class Catalogo extends React.Component {
 
@@ -132,7 +132,8 @@ let subtotal=prod.precio*cantidad;
 let p=JSON.parse(`{"nombre":"${prod.nombre}","subtotal":"${subtotal}","cantidad":"${cantidad}"}`)
 this.kart.push(p)
   sessionStorage.setItem('kart', JSON.stringify(this.kart))
-
+var h=new Home()
+h.updateNotification()
 return
 }
 }
